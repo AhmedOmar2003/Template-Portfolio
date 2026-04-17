@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="البورتفوليو الاحترافي الأسرع والأكثر تكيفاً. تم بناؤه بتقنيات عالمية حديثة ليناسب كافة التخصصات المهنية. Premium world-class portfolio template.">
+    <meta name="keywords" content="بورتفوليو احترافي, قالب عالمي, مسار مهني, تصميم الويب, Template PRO, Portfolio, Web Developer, UI/UX">
+    <meta name="author" content="Template PRO">
+    <meta name="theme-color" content="#050505">
+    <title>Contact - Universal Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sticky Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text lang-en">Template<span class="accent">.PRO</span></span>
+                    <span class="logo-text lang-ar">قالب<span class="accent">ك</span></span>
+                </a>
+            </div>
+            
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link"><span class="lang-en">Home</span><span class="lang-ar">الرئيسية</span></a></li>
+                    <li><a href="about.html" class="nav-link"><span class="lang-en">About</span><span class="lang-ar">نبذة</span></a></li>
+                    <li><a href="services.html" class="nav-link"><span class="lang-en">Capabilities</span><span class="lang-ar">القدرات</span></a></li>
+                    <li><a href="projects.html" class="nav-link"><span class="lang-en">Projects</span><span class="lang-ar">الأعمال</span></a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="lang-switch" id="lang-toggle" aria-label="Toggle Language">
+                        <span class="lang-en">AR</span>
+                        <span class="lang-ar">EN</span>
+                    </button>
+                    <a href="contact.html" class="btn btn-primary btn-sm header-cta">
+                        <span class="lang-en">Let's Talk</span>
+                        <span class="lang-ar">لنتحدث</span>
+                    </a>
+                </div>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main style="padding-top: 100px;">
+        
+        <!-- Contact Section -->
+        <section class="section pt-4">
+            <div class="container container-sm">
+                <div class="section-header text-center">
+                    <h1 class="section-title">
+                        <span class="lang-en">Ignite the <span class="text-gradient">Conversation</span></span>
+                        <span class="lang-ar">ابدأ <span class="text-gradient">المحادثة</span></span>
+                    </h1>
+                    <p class="section-desc" style="margin: 0 auto;">
+                        <span class="lang-en">Fill out the form below to discuss custom architecture for your high-performance professional portfolio.</span>
+                        <span class="lang-ar">أكمل النموذج أدناه لمناقشة بناء واجهة احترافية عالية الأداء خاصة بمهنتك.</span>
+                    </p>
+                </div>
+
+                <div class="contact-container">
+                    <form id="contact-form" novalidate>
+                        <div class="grid-2-col-sm mb-4">
+                            <div class="input-control">
+                                <label for="name">
+                                    <span class="lang-en">Full Name</span><span class="lang-ar">الاسم الكامل</span>
+                                </label>
+                                <input type="text" id="name" required placeholder="John Doe" data-placeholder-en="John Doe" data-placeholder-ar="محمد أحمد">
+                            </div>
+                            <div class="input-control">
+                                <label for="email">
+                                    <span class="lang-en">Email Address</span><span class="lang-ar">البريد الإلكتروني</span>
+                                </label>
+                                <input type="email" id="email" required placeholder="name@company.com" data-placeholder-en="name@company.com" data-placeholder-ar="الاسم@الشركة.com">
+                            </div>
+                        </div>
+
+                        <div class="input-control mb-4">
+                            <label for="profession">
+                                <span class="lang-en">Your Profession / Industry</span><span class="lang-ar">المهنة / القطاع</span>
+                            </label>
+                            <input type="text" id="profession" required placeholder="e.g. Architect, Surgeon, Tech Startup" data-placeholder-en="e.g. Architect, Surgeon, Tech Startup" data-placeholder-ar="مثل: مهندس معماري، جراح، رائد أعمال">
+                        </div>
+
+                        <div class="input-control mb-4">
+                            <label for="message">
+                                <span class="lang-en">Project Details</span><span class="lang-ar">تفاصيل المشروع</span>
+                            </label>
+                            <textarea id="message" rows="6" required placeholder="Describe what kind of aesthetic and functionality you are looking for..." data-placeholder-en="Describe what kind of aesthetic and functionality you are looking for..." data-placeholder-ar="صف بدقة الوظائف والتصميم المميز الذي تبحث عنه..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <span class="lang-en">Submit Inquiry</span>
+                            <span class="lang-ar">إرسال الطلب</span>
+                        </button>
+                        
+                        <div id="form-success" class="form-success hidden">
+                            <span class="lang-en"><i class="fa-solid fa-check"></i> Inquiry submitted successfully!</span>
+                            <span class="lang-ar"><i class="fa-solid fa-check"></i> تم إرسال طلبك بنجاح!</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-surface">
+        <div class="container footer-container">
+            <div class="footer-info">
+                <div class="logo">
+                     <span class="logo-text lang-en">Template<span class="accent">.PRO</span></span>
+                    <span class="logo-text lang-ar">قالب<span class="accent">ك</span></span>
+                </div>
+                <p class="footer-desc mt-2">
+                    <span class="lang-en">A universal, high-contrast portfolio design built to adapt powerfully to any profession.</span>
+                    <span class="lang-ar">تصميم بورتفوليو عالمي وعالي التباين، مخصص للتكيف بقوة مع أي مهنة.</span>
+                </p>
+                <div class="social-links mt-4">
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4 class="footer-title">
+                    <span class="lang-en">Sitemap</span><span class="lang-ar">خريطة الموقع</span>
+                </h4>
+                <ul>
+                    <li><a href="about.html"><span class="lang-en">About</span><span class="lang-ar">نبذة عني</span></a></li>
+                    <li><a href="projects.html"><span class="lang-en">Projects</span><span class="lang-ar">الأعمال</span></a></li>
+                    <li><a href="services.html"><span class="lang-en">Capabilities</span><span class="lang-ar">القدرات والخدمات</span></a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h4 class="footer-title">
+                    <span class="lang-en">Start Building</span><span class="lang-ar">ابدأ البناء</span>
+                </h4>
+                <ul>
+                    <li>hello@template.pro</li>
+                    <li>+20 100 000 0000</li>
+                    <li>
+                        <a href="contact.html" class="btn btn-primary btn-sm mt-2" style="display:inline-block">
+                            <span class="lang-en">Hire Me</span><span class="lang-ar">وظفني</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-flex">
+                <p>
+                    <span class="lang-en">&copy; 2026 Template.PRO. All rights reserved.</span>
+                    <span class="lang-ar">&copy; 2026 قالبك - جميع الحقوق محفوظة.</span>
+                </p>
+                <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP Libraries for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
