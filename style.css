@@ -60,7 +60,7 @@
 }
 
 html {
-    scroll-behavior: auto; /* Handled by GSAP/Lenis usually, but we keep basic */
+    scroll-behavior: smooth;
     font-size: 16px;
     background-color: var(--bg-primary);
     overflow-x: hidden;
@@ -96,9 +96,28 @@ html[dir="rtl"] .lang-en { display: none !important; }
 html[dir="ltr"] .lang-ar { display: none !important; }
 
 h1, h2, h3, h4, h5, h6 {
-    line-height: 1.1;
+    line-height: 1.35;
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+html[dir="rtl"] h1, 
+html[dir="rtl"] h2, 
+html[dir="rtl"] h3, 
+html[dir="rtl"] h4, 
+html[dir="rtl"] h5, 
+html[dir="rtl"] h6 {
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+p, li, .hero-subtitle, .project-desc, .premium-card-desc {
+    line-height: 1.8;
+}
+
+p {
+    margin-bottom: 1.5rem;
 }
 
 a {
@@ -260,20 +279,35 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     background: transparent;
     transition: var(--transition-smooth);
     padding: 1.5rem 0;
+    will-change: padding;
 }
 
 .header.scrolled {
-    background: rgba(5, 5, 5, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-subtle);
+    padding: 1rem 0;
+    background: transparent;
 }
 
 .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: var(--transition-smooth);
+    border-radius: var(--radius-full);
+}
+
+.header.scrolled .header-inner {
+    background: var(--bg-surface);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-subtle);
+    padding: 0.8rem 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .header.scrolled .header-inner {
+        padding: 0.6rem 1.2rem;
+    }
 }
 
 .logo-text {
@@ -1006,4 +1040,12 @@ html[dir="rtl"] .footer-bottom { flex-direction: row-reverse; }
     .premium-card { padding: 2rem 1.5rem; }
     .contact-container { padding: 1.5rem; }
     .card-grid { grid-template-columns: 1fr; }
+}
+
+/* Performance Optimizations */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+.section, .card-grid > *, .stats-container > *, .projects-container > * {
+    will-change: transform, opacity;
 }
