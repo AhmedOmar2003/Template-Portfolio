@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Header Scroll Effect & Active Page Highlighting
     const header = document.getElementById('header');
-    const backToTopBtn = document.getElementById('back-to-top');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const revealElements = document.querySelectorAll('.reveal-up');
 
@@ -75,10 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateScrollState = () => {
         if (header) {
             header.classList.toggle('scrolled', window.scrollY > 50);
-        }
-
-        if (backToTopBtn) {
-            backToTopBtn.classList.toggle('visible', window.scrollY > 500);
         }
 
         scrollTicking = false;
@@ -231,13 +226,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Back to Top Button
-    if (backToTopBtn) {
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: prefersReducedMotion ? 'auto' : 'smooth'
-            });
-        });
-    }
 });
