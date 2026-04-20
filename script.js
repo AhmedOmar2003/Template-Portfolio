@@ -67,16 +67,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Header Scroll Effect & Active Page Highlighting
     const header = document.getElementById('header');
-    
-    window.addEventListener('scroll', () => {
+    const backToTopBtn = document.getElementById('back-to-top');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealElements = document.querySelectorAll('.reveal-up');
+
+    let scrollTicking = false;
+    const updateScrollState = () => {
         if (header) {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            header.classList.toggle('scrolled', window.scrollY > 50);
         }
-    });
+
+        if (backToTopBtn) {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 500);
+        }
+
+        scrollTicking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(updateScrollState);
+    }, { passive: true });
+
+    updateScrollState();
 
     const currentPath = window.location.pathname;
     const pathParts = currentPath.split('/');
@@ -143,87 +157,24 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeEffect, 1000);
     }
 
-    // 5. GSAP Animations Integration
-    // Check if GSAP is loaded
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Smooth reveal for sections
-        const sections = document.querySelectorAll('.section');
-        sections.forEach((sec) => {
-            gsap.fromTo(sec, 
-                { opacity: 0, y: 40 },
-                { 
-                    opacity: 1, 
-                    y: 0, 
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: sec,
-                        start: "top 85%",
-                    }
-                }
-            );
-        });
-
-        // Staggered reveal for cards
-        const staggerGroups = document.querySelectorAll('.card-grid, .stats-container, .bento-grid, .timeline');
-        staggerGroups.forEach((group) => {
-            const children = group.children;
-            gsap.fromTo(children, 
-                { opacity: 0, y: 50 },
-                { 
-                    opacity: 1, 
-                    y: 0, 
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: group,
-                        start: "top 85%",
-                    }
-                }
-            );
-        });
-
-        // Parallax & Scale for majestic mockup in hero
-        const mockup = document.querySelector('.mockup-container');
-        if (mockup) {
-            gsap.fromTo(mockup,
-                { scale: 0.95, opacity: 0.8 },
-                {
-                    scale: 1,
-                    opacity: 1,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: ".hero",
-                        start: "top top",
-                        end: "bottom center",
-                        scrub: 1
-                    }
-                }
-            );
-        }
-    } else {
-        // Fallback for elements if GSAP fails to load (Intersection Observer)
-        console.warn('GSAP not loaded. Using fallback reveals.');
-        const revealElements = document.querySelectorAll('.card-grid > *, .bento-grid > *, .stats-container > *, .timeline > *');
-        
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
+    // 5. Lightweight Reveal Animations
+    if (revealElements.length) {
+        if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -8% 0px'
             });
-        }, { threshold: 0.1 });
 
-        revealElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            revealObserver.observe(el);
-        });
+            revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('is-visible'));
+        }
     }
 
     // 6. Form Validation
@@ -281,26 +232,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 7. Back to Top Button
-    const backToTopBtn = document.getElementById('back-to-top');
-    
     if (backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTopBtn.style.opacity = '1';
-                backToTopBtn.style.pointerEvents = 'auto';
-            } else {
-                backToTopBtn.style.opacity = '0';
-                backToTopBtn.style.pointerEvents = 'none';
-            }
-        });
-
-        backToTopBtn.style.opacity = '0';
-        backToTopBtn.style.pointerEvents = 'none';
-
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth'
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
             });
         });
     }
